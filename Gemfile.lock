@@ -1,0 +1,43 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    json (2.1.0)
+    mustermann (2.0.2)
+      ruby2_keywords (~> 0.0.1)
+    nio4r (2.5.8)
+    pg (0.18.4-x64-mingw32)
+    puma (5.6.5)
+      nio4r (~> 2.0)
+    rack (2.2.4)
+    rack-protection (2.2.2)
+      rack
+    ruby2_keywords (0.0.5)
+    rubyzip (2.3.2)
+    sequel (4.49.0)
+    sinatra (2.2.2)
+      mustermann (~> 2.0)
+      rack (~> 2.2)
+      rack-protection (= 2.2.2)
+      tilt (~> 2.0)
+    sqlite3 (1.5.0-x64-mingw32)
+    tilt (2.0.11)
+    waitutil (0.2.1)
+
+PLATFORMS
+  x64-mingw32
+
+DEPENDENCIES
+  json
+  pg (~> 0.18.4)
+  puma
+  rubyzip
+  sequel (~> 4.36)
+  sinatra (~> 2.1)
+  sqlite3 (~> 1.4, >= 1.4.2)
+  waitutil (~> 0.2.1)
+
+RUBY VERSION
+   ruby 2.6.9p207
+
+BUNDLED WITH
+   1.17.2
