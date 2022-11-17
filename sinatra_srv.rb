@@ -20,11 +20,31 @@ require 'C:\www\root\sinatra_1c_77\db\base.rb'
 require 'sinatra/base'
 require 'waitutil'
 require 'fileutils'
+require 'logger'
+
+::Logger.class_eval { alias :write :'<<' }
+access_log = ::File.join(::File.dirname(::File.expand_path(__FILE__)),'.','log','access.log')
+access_logger = ::Logger.new(access_log)
+error_logger = ::File.new(::File.join(::File.dirname(::File.expand_path(__FILE__)),'.','log','error.log'),"a+")
+error_logger.sync = true
+
+log = File.new("log/sinatra.log", "a+")
+
+$stdout.reopen(log)
+$stderr.reopen(log)
+
+$stderr.sync = true
+$stdout.sync = true
 
 configure do
   set :server, "puma"
   # set       :port => 3000
+  use ::Rack::CommonLogger, access_logger
 end
+
+before {
+  env["rack.errors"] =  error_logger
+}
 
 use Rack::Auth::Basic do |username, password|
   username == 'admin' && password == '@fdkj7Uyt@F'
@@ -227,6 +247,7 @@ get /\/work\/convert\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\// do
 
     pid = spawn("ruby #{exe_file}  '#{rule}' '#{date1}' '#{date2}' '#{period}' '#{update}' '#{code}' '#{data_file}'")
     p "current process PID - #{pid}"
+    
   rescue => e
     p "=============================================================================================================="
     p "ошибка выполнения файла spawn PID - #{pid}"

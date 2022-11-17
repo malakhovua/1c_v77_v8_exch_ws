@@ -5,3 +5,4 @@
 /.idea
 /Gemfile.lock
 /run_server.bat
+/log/
