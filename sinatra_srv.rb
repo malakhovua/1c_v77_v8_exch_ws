@@ -237,24 +237,33 @@ get /\/work\/convert\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\// do
   code = params['captures'][6]
 
   dir_path = 'C:/www/root/sinatra_1c_77/convert/data/'
+  main_pid = $PID
 
   data_file =  dir_path + SecureRandom.uuid.to_s + '.xml'
   exe_file = "C:/www/root/sinatra_1c_77/convert/execute_1c77.rb"
-  p "PID - #{$PID}"
+  p "PID - #{main_pid}"
   puts "#{Time.now} Конвертация загрузка #{rule} за период от #{date1} до #{date2} . Период: #{period} . Код: #{code} "
 
   begin
 
     pid = spawn("ruby #{exe_file}  '#{rule}' '#{date1}' '#{date2}' '#{period}' '#{update}' '#{code}' '#{data_file}'")
     p "current process PID - #{pid}"
-    
+
   rescue => e
     p "=============================================================================================================="
     p "ошибка выполнения файла spawn PID - #{pid}"
     p e.message
     p "=============================================================================================================="
-    Process.kill("TERM", $PID)
+
     pid = spawn("ruby C:/www/root/sinatra_1c_77/sinatra_srv.rb -e production")
+
+    P "NEW PROCESS PID - #{pid} "
+    P "KILL PROCESS #{main_pid}"
+    Process.kill("TERM", $PID)
+
+    pid = spawn("ruby C:/www/root/sinatra_1c_77/sinatra_srv.rb -e production")
+    P "START NEW PROCESS PID - #{pid}...."
+
   end
 
 
