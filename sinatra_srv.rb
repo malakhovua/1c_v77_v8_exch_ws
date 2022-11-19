@@ -241,7 +241,8 @@ get /\/work\/convert\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\// do
 
   data_file =  dir_path + SecureRandom.uuid.to_s + '.xml'
   exe_file = "C:/www/root/sinatra_1c_77/convert/execute_1c77.rb"
-  p "PID - #{main_pid}"
+  p "MAIN APPLICATION PID - #{main_pid}"
+
   puts "#{Time.now} Конвертация загрузка #{rule} за период от #{date1} до #{date2} . Период: #{period} . Код: #{code} "
 
   begin
@@ -251,18 +252,16 @@ get /\/work\/convert\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\// do
 
   rescue => e
     p "=============================================================================================================="
-    p "ошибка выполнения файла spawn PID - #{pid}"
-    p e.message
+    p "ERROR spawn PID - #{pid}"
     p "=============================================================================================================="
 
-    pid = spawn("ruby C:/www/root/sinatra_1c_77/sinatra_srv.rb -e production")
+    p "APPLICATION PID - #{$PID}"
+    p e.message
 
-    P "NEW PROCESS PID - #{pid} "
-    P "KILL PROCESS #{main_pid}"
-    Process.kill("TERM", $PID)
+    msg = e.message
 
-    pid = spawn("ruby C:/www/root/sinatra_1c_77/sinatra_srv.rb -e production")
-    P "START NEW PROCESS PID - #{pid}...."
+    return msg.to_s
+    # pid_new = spawn("ruby C:/www/root/sinatra_1c_77/sinatra_srv.rb -e production")
 
   end
 
