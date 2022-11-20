@@ -1,1 +1,1 @@
-ruby test.rb -e production
+ruby sinatra_srv.rb -e production
