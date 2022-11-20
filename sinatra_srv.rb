@@ -30,13 +30,11 @@ error_logger.sync = true
 
 log = File.new("log/sinatra.log", "a+")
 
-=begin
 $stdout.reopen(log)
 $stderr.reopen(log)
 
 $stderr.sync = true
 $stdout.sync = true
-=end
 
 configure do
   set :server, "puma"
@@ -252,8 +250,6 @@ get /\/work\/convert\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\// do
     pid = spawn("ruby #{exe_file}  '#{rule}' '#{date1}' '#{date2}' '#{period}' '#{update}' '#{code}' '#{data_file}'")
     p "current process PID - #{pid}"
 
-    d = 1/0
-
   rescue => e
     p "=============================================================================================================="
     p "ERROR spawn PID - #{pid}"
@@ -264,7 +260,7 @@ get /\/work\/convert\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\// do
 
     msg = e.message
 
-    
+
     pid_new = spawn("ruby C:/www/root/sinatra_1c_77/sinatra_srv.rb -e production")
 
      Process.kill("TERM", main_pid)
