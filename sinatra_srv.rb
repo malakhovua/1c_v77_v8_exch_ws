@@ -294,6 +294,10 @@ get /\/work\/convert\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\// do
     return e.message
   end
 
+  p "detach process pid - #{pid}"
+  
+  Process.detach pid
+
   #result =>
   return result
 
