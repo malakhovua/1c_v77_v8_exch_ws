@@ -263,15 +263,6 @@ get /\/work\/convert\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\// do
 
     msg = e.message
 
-    #if pid == ""
-      p "***********************************************************************************"
-      p "Try to create new application..."
-      pid_new = spawn("ruby C:/www/root/sinatra_1c_77/sinatra_srv.rb -e production")
-      p "NEW APP PID - #{pid_new}"
-      p "kill old application..."
-    #Process.kill("TERM", main_pid)
-    #end
-
     return msg.to_s
 
   end
@@ -295,10 +286,9 @@ get /\/work\/convert\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\/(.*)\// do
   end
 
   p "detach process pid - #{pid}"
-  
+
   Process.detach pid
 
-  #result =>
   return result
 
 end
