@@ -30,11 +30,13 @@ error_logger.sync = true
 
 log = File.new("log/sinatra.log", "a+")
 
+=begin
 $stdout.reopen(log)
 $stderr.reopen(log)
 
 $stderr.sync = true
 $stdout.sync = true
+=end
 
 configure do
   set :server, "puma"
@@ -339,7 +341,11 @@ post '/work/data_documents/' do
 
   p("end upload #{Time.now}")
 
-  return  data
+  begin
+    convert.send_data_v8(data, "documents_data")
+  rescue => e
+    p e.message
+  end
 
 end
 

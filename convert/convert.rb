@@ -1,5 +1,8 @@
 require 'date'
 require 'json'
+require "net/http"
+require "uri"
+require './path'
 
 class Convert
 
@@ -64,17 +67,36 @@ class Convert
   def get_documents_list_json
     file = File.read(@data_file)
     data = JSON.parse(file)
+
     data.each { |e|
       date = Date.parse(e['date'])
       date_77 = "#{date.day.to_s}.#{date.month.to_s}.#{date.year.to_s}"
       doc = @v7.CreateObject('Документ.' +e['doc_type'])
       if doc.НайтиПоНомеру(e['number'], date_77) == 1
         e['number77'] = doc.НомерДок
-        e['Date77'] = doc.ДатаДок
+        e['date77'] = doc.ДатаДок
         e['post77'] = doc.Проведен() == 1 ? true : false
       end
     }
-     data.to_json.to_s
+     data.to_json
   end
+
+  def send_data_v8(data, method_name='')
+
+    path = Path.new
+
+    uri = URI("http://#{path.v8_path[:host]}:#{path.v8_path[:port]}/unf_dev/hs/v77-api/data_v7/#{method_name}/")
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request.body = data
+    request.basic_auth path.v8_path[:usr], path.v8_path[:pw]
+
+    # Send the request
+    res = http.request(request)
+    p "send data to server 1cV8, status response #{res.code} "
+
+  end
+
 
 end
