@@ -30,13 +30,12 @@ error_logger.sync = true
 
 log = File.new("log/sinatra.log", "a+")
 
-=begin
 $stdout.reopen(log)
 $stderr.reopen(log)
 
 $stderr.sync = true
 $stdout.sync = true
-=end
+
 
 configure do
   set :server, "puma"
