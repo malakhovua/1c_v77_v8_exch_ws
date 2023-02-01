@@ -20,6 +20,7 @@ class Convert
 
   end
 
+=begin
   def get_data_file
 
     path = 'C:\www\root\sinatra_1c_77\convert\V77Exp.ert'
@@ -51,6 +52,7 @@ class Convert
     @v7.ОткрытьФормуМодально('Отчет',parameterList, path)
 
   end
+=end
 
   def upload_data_file
 
@@ -95,8 +97,6 @@ class Convert
     # Send the request
     res = http.request(request)
     p "send data to server 1cV8, status response #{res.code} "
-
   end
-
 
 end

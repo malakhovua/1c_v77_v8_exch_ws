@@ -3,6 +3,7 @@ require 'win32ole'
 require 'securerandom'
 require 'C:\www\root\sinatra_1c_77\path.rb'
 require 'fileutils'
+require 'zip'
 
 rule = ARGV[0]
 date1 = ARGV[1]
@@ -30,10 +31,25 @@ v7.Initialize(v7.RMTrade, str, '"NO_SPLASH_SHOW"')
 
 path = 'C:\www\root\sinatra_1c_77\convert\V77Exp.ert'
 
-#  FileUtils.cp path, new_path
-
 ruleFileName = 'C:\www\root\sinatra_1c_77\convert\rules\rules.xml'
+ruleFileName_zip = 'C:\www\root\sinatra_1c_77\convert\rules\rules.zip'
+
 dataFileName = data_file
+
+#delete file rules
+begin
+  if File.exist?(ruleFileName)
+    File.delete(ruleFileName)
+  end
+rescue => e
+  p e.message
+end
+
+Zip::File.open(ruleFileName_zip) do |zip_file|
+  zip_file.each do |f|
+    zip_file.extract(f, ruleFileName) unless File.exist?(ruleFileName)
+  end
+end
 
 nameCommand = 'Выгрузить'
 usedRulesUnloading = rule

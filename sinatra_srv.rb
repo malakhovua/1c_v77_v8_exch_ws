@@ -22,6 +22,15 @@ require 'waitutil'
 require 'fileutils'
 require 'logger'
 
+#log in file ?
+=begin
+puts "Output logs to a file? Enter (y/n)."
+answer= gets
+answer.chomp!
+=end
+
+LOG_IN_FILE = true #answer == "y" ?  true : false
+
 ::Logger.class_eval { alias :write :'<<' }
 access_log = ::File.join(::File.dirname(::File.expand_path(__FILE__)),'.','log','access.log')
 access_logger = ::Logger.new(access_log)
@@ -30,12 +39,16 @@ error_logger.sync = true
 
 log = File.new("log/sinatra.log", "a+")
 
-$stdout.reopen(log)
-$stderr.reopen(log)
+if LOG_IN_FILE == true
 
-$stderr.sync = true
-$stdout.sync = true
+  p 'Starting server. Logs will be saved in file  - log/sinatra.log.'
 
+  $stdout.reopen(log)
+  $stderr.reopen(log)
+
+  $stderr.sync = true
+  $stdout.sync = true
+end
 
 configure do
   set :server, "puma"
