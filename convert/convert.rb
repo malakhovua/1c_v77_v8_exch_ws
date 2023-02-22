@@ -88,6 +88,8 @@ class Convert
     path = Path.new
 
     uri = URI("http://#{path.v8_path[:host]}:#{path.v8_path[:port]}/unf_dev/hs/v77-api/data_v7/#{method_name}/")
+    p data
+    p uri
 
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Post.new(uri.request_uri)
