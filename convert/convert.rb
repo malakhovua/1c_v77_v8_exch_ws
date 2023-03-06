@@ -71,10 +71,9 @@ class Convert
     data = JSON.parse(file)
 
     data.each { |e|
-      date = Date.parse(e['date'])
-      date_77 = "#{date.day.to_s}.#{date.month.to_s}.#{date.year.to_s}"
+      date = e['date']
       doc = @v7.CreateObject('Документ.' +e['doc_type'])
-      if doc.НайтиПоНомеру(e['number'], date_77) == 1
+      if doc.НайтиПоНомеру(e['number'], date) == 1
         e['number77'] = doc.НомерДок
         e['date77'] = doc.ДатаДок
         e['post77'] = doc.Проведен() == 1 ? true : false
@@ -88,8 +87,6 @@ class Convert
     path = Path.new
 
     uri = URI("http://#{path.v8_path[:host]}:#{path.v8_path[:port]}/unf_dev/hs/v77-api/data_v7/#{method_name}/")
-    p data
-    p uri
 
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Post.new(uri.request_uri)
