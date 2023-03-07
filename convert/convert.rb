@@ -91,6 +91,7 @@ class Convert
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Post.new(uri.request_uri)
     request.body = data
+    p data
     request.basic_auth path.v8_path[:usr], path.v8_path[:pw]
 
     # Send the request
