@@ -20,40 +20,6 @@ class Convert
 
   end
 
-=begin
-  def get_data_file
-
-    path = 'C:\www\root\sinatra_1c_77\convert\V77Exp.ert'
-
-    ruleFileName = 'C:\www\root\sinatra_1c_77\convert\rules\rules.xml'
-    dataFileName = @data_file
-    date1  = @date1
-    date2 = @date2
-    nameCommand = 'Выгрузить'
-    usedRulesUnloading  = @rule
-    commentUnloadingObjects = 0
-
-    tableSettingsParameters = @v7.CreateObject('СписокЗначений')
-    tableSettingsParameters.ДобавитьЗначение(@period,'ПериодВыгрузки')
-    tableSettingsParameters.ДобавитьЗначение(@update,'Обновлять')
-    tableSettingsParameters.ДобавитьЗначение(@code,'Код')
-
-    parameterList = @v7.CreateObject('СписокЗначений')
-    parameterList.ДобавитьЗначение(ruleFileName,'ИмяФайлаПравил')
-    parameterList.ДобавитьЗначение(dataFileName,'ИмяФайлаДанных')
-    parameterList.ДобавитьЗначение(date1,'ДатаНачала')
-    parameterList.ДобавитьЗначение(date2,'ДатаОкончания')
-    parameterList.ДобавитьЗначение(tableSettingsParameters,'ТаблицаНастройкиПараметров')
-    parameterList.ДобавитьЗначение(commentUnloadingObjects,'КомментироватьВыгрузкуОбъектов')
-    parameterList.ДобавитьЗначение(usedRulesUnloading,'ИспользуемыеПравилаВыгрузки')
-    parameterList.ДобавитьЗначение(nameCommand,'ИмяКоманды')
-    #ParameterList.ДобавитьЗначение(ИмяАлгоритма,'ИмяАлгоритма')
-
-    @v7.ОткрытьФормуМодально('Отчет',parameterList, path)
-
-  end
-=end
-
   def upload_data_file
 
     path = 'C:\www\root\sinatra_1c_77\convert\V77Imp.ert';
