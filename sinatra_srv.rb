@@ -201,7 +201,6 @@ end
 
 # ===================END GET REPORTexitS=========================================================
 
-
 def get_connect
   conn = Application_v7.new
   conn.create
