@@ -66,15 +66,15 @@ rescue => e
   exit
 end
 
-tableSettingsParameters.ДобавитьЗначение(period, 'ПериодВыгрузки')
+tableSettingsParameters.ДобавитьЗначение(v7.StringToDate(period), 'ПериодВыгрузки')
 tableSettingsParameters.ДобавитьЗначение(update, 'Обновлять')
 tableSettingsParameters.ДобавитьЗначение(code, 'Код')
 
 parameterList = v7.CreateObject('СписокЗначений')
 parameterList.ДобавитьЗначение(ruleFileName, 'ИмяФайлаПравил')
 parameterList.ДобавитьЗначение(dataFileName, 'ИмяФайлаДанных')
-parameterList.ДобавитьЗначение(date1, 'ДатаНачала')
-parameterList.ДобавитьЗначение(date2, 'ДатаОкончания')
+parameterList.ДобавитьЗначение( v7.StringToDate(date1), 'ДатаНачала')
+parameterList.ДобавитьЗначение(v7.StringToDate(date2), 'ДатаОкончания')
 parameterList.ДобавитьЗначение(tableSettingsParameters, 'ТаблицаНастройкиПараметров')
 parameterList.ДобавитьЗначение(commentUnloadingObjects, 'КомментироватьВыгрузкуОбъектов')
 parameterList.ДобавитьЗначение(usedRulesUnloading, 'ИспользуемыеПравилаВыгрузки')
