@@ -7,3 +7,4 @@
 /run_server.bat
 /log/
 /convert/rules/rules.xml
+/data_processing/log_post_documents.csv
