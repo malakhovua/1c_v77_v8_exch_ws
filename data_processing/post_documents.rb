@@ -50,6 +50,7 @@ class Post_documents
 
 
     @v7.ОткрытьФорму('Отчет',parameterList , data_processor_path)
+    @v7.ExecuteBatch("ЗавершитьРаботуСистемы()")
 
 
   end
