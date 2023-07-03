@@ -1,7 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    json (2.1.0)
     mustermann (2.0.2)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.8)
@@ -27,7 +26,6 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  json
   pg (~> 0.18.4)
   puma
   rubyzip
