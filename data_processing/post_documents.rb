@@ -11,9 +11,10 @@ class Post_documents
     conn.create
     conn.connect
     @v7 = conn.v7
+    path = Path.new
 
-    data_processor_path =  (Dir.pwd + '/post_documents.ert').gsub(/\\/,'/')
-    log_path = (Dir.pwd + '/log_post_documents.csv').gsub(/\\/,'/')
+    data_processor_path = path.project_path + '\data_processing\post_documents.ert'  #(Dir.pwd + '/post_documents.ert').gsub(/\\/,'/')
+    log_path = path.project_path + '\data_processing\log_post_documents.csv'#(Dir.pwd + '/log_post_documents.csv').gsub(/\\/,'/')
     log_path = log_path
 
     documentsList = @v7.CreateObject('СписокЗначений')

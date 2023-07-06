@@ -11,8 +11,9 @@ class Recalc_cost_packs
     conn.create
     conn.connect
     @v7 = conn.v7
+    path = Path.new
 
-    data_processor_path =  (Dir.pwd + '/recalc_cost_packs.ert').gsub(/\\/,'/')
+    data_processor_path =  path.project_path + '\data_processing\recalc_cost_packs.ert' #(Dir.pwd + '/recalc_cost_packs.ert').gsub(/\\/,'/')
 
     parameterList = @v7.CreateObject('СписокЗначений')
     parameterList.ДобавитьЗначение(1,'perform_data_processing')
