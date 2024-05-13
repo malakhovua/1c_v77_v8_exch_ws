@@ -16,7 +16,7 @@ attr_accessor :v7
  
 def connect 
   str = @path.v7_path
-  @v7.Initialize(@v7.RMTrade,str,'"NO_SPLASH_SHOW"')
+  @v7.Initialize(@v7.RMTrade,str)#,'"NO_SPLASH_SHOW"')
  end
 
 end
