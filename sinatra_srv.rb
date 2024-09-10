@@ -141,37 +141,20 @@ post '/work/data_file' do
   convert.data_file = data_file
   convert.upload_data_file
 
-  File.delete(data_file) if File.exist?(data_file)
+   File.delete(data_file) if File.exist?(data_file)
 
   p("end upload #{Time.now}")
 
 end
 
-post '/work/data_documents/' do
+get '/get_gui_objects/:id_session/' do
 
-  data = request.body
-
-  dir_path = 'C:/www/root/sinatra_1c_77/convert/data_upload/'
-  data_file =  dir_path + SecureRandom.uuid.to_s + '.json'
-
-  File.open(data_file, 'w') do |f|
-    f.puts(data.read)
-  end
-
-  p("begin upload #{Time.now}")
+  id_session = params[:id_session]
 
   get_connect
 
-  convert = Convert.new(@V7,'','')
-  convert.data_file = data_file
-  data = convert.get_documents_list_json
-
-  File.delete(data_file) if File.exist?(data_file)
-
-  p("end upload #{Time.now}")
-
   begin
-    convert.send_data_v8(data, "documents_data")
+    @V7.GetDocumentsList(id_session)
   rescue => e
     p e.message
   end
