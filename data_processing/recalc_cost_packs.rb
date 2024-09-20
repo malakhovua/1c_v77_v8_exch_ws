@@ -14,9 +14,11 @@ class Recalc_cost_packs
     path = Path.new
 
     data_processor_path =  path.project_path + '\data_processing\recalc_cost_packs.ert' #(Dir.pwd + '/recalc_cost_packs.ert').gsub(/\\/,'/')
+    log_path = path.project_path + '\data_processing\recalc_cost_packs.csv'#(Dir.pwd + '/recalc_cost_packs.csv').gsub(/\\/,'/')
 
     parameterList = @v7.CreateObject('СписокЗначений')
     parameterList.ДобавитьЗначение(1,'perform_data_processing')
+    parameterList.ДобавитьЗначение(log_path, 'log_path')
 
 
     @v7.ОткрытьФорму('Отчет',parameterList , data_processor_path)

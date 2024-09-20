@@ -9,3 +9,4 @@
 /config/
 /convert/rules/rules.xml
 /data_processing/log_post_documents.csv
+/data_processing/recalc_cost_packs.csv
