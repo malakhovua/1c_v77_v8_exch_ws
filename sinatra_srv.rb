@@ -184,6 +184,24 @@ end
 
 # ===================END GET REPORTexitS=========================================================
 
+get '/work/documents/:name/:number/:date' do
+
+  get_connect
+
+  date_doc = @V7.StringToDate(params[:date][0...10])
+
+
+  if params[:name] =='client_order'
+    result =  @V7.GetOrderByNumber(params[:number], date_doc)
+  end
+
+    return result
+
+end
+
+
+
+# ===================END GET REPORTexitS=========================================================
 def get_connect
   conn = Application_v7.new
   conn.create
