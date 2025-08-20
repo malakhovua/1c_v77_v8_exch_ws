@@ -55,4 +55,21 @@ class Report
 
   end
 
+  def get_order_fact_weight
+
+    rs = @V7.CreateObject("ODBCRecordset");
+    textQuery = "SELECT Sum($УМК_ЗаказКлиентаСтроки.КвоФакт) СуммаКвоФакт
+    FROM $ДокументСтроки.УМК_ЗаказКлиента AS УМК_ЗаказКлиентаСтроки
+    INNER JOIN _1SJOURN AS Журнал ON УМК_ЗаказКлиентаСтроки.IDDOC = Журнал.IDDOC
+    WHERE (Журнал.DATE_TIME_IDDOC >= :data1)
+    AND (Журнал.DATE_TIME_IDDOC <= :data2~)
+    AND (Журнал.DOCNO = :doc_number)"
+    rs.SetTextParam("data1", @period1);
+    rs.SetTextParam("data2", @period2);
+    rs.SetTextParam("doc_number", @params['doc_number']);
+
+    return rs.ExecuteScalar(textQuery).to_json
+
+  end
+
 end
