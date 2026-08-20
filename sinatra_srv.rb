@@ -184,7 +184,7 @@ end
 
 # ===================END GET REPORTexitS=========================================================
 
-get '/work/documents/:name/:number/:date' do
+get '/work/documents/:name/:number/:date/:group_code' do
 
   get_connect
 
@@ -192,7 +192,11 @@ get '/work/documents/:name/:number/:date' do
 
 
   if params[:name] =='client_order'
-    result =  @V7.GetOrderByNumber(params[:number], date_doc)
+    if params[:group_code] != ""
+      result = @V7.GetOrderByClientGroupCode(params[:group_code], date_doc)
+    else
+      result = @V7.GetOrderByNumber(params[:number], date_doc)
+    end
   end
 
     return result
