@@ -193,11 +193,14 @@ get '/work/documents/:name/:number/:date/:group_code/:date2' do
   if params[:name] == 'client_order'
     if params[:group_code] != "empty"
       result = @V7.GetOrderByClientGroupCode(params[:group_code], date_doc)
+      p "GetOrderByClientGroupCode(#{params[:group_code]} #{date_doc})"
     elsif params[:date2] != "empty"
       date_2 = @V7.StringToDate(params[:date2][0...10])
       result = @V7.GetOrderByPeriod(date_doc,date_2)
+      p "GetOrderByPeriod (#{date_doc} #{date_2})"
     else
       result = @V7.GetOrderByNumber(params[:number], date_doc)
+      p "GetOrderByNumber(#{params[:number]}, #{date_doc})"
     end
   end
 
