@@ -183,32 +183,25 @@ get '/work/reports/:report/:date1/:date2/:params' do
 end
 
 # ===================END GET REPORTexitS=========================================================
-
-get '/work/documents/:name/:number/:date/:group_code/:date2' do
-
+before '/work/orders/*' do
   get_connect
-
-  date_doc = @V7.StringToDate(params[:date][0...10])
-
-  if params[:name] == 'client_order'
-    if params[:group_code] != "empty"
-      result = @V7.GetOrderByClientGroupCode(params[:group_code], date_doc)
-      p "GetOrderByClientGroupCode(#{params[:group_code]},#{date_doc})"
-    elsif params[:date2] != "empty"
-      date_2 = @V7.StringToDate(params[:date2][0...10])
-      result = @V7.GetOrderByPeriod(date_doc,date_2)
-      p "GetOrderByPeriod (#{date_doc},#{date_2})"
-    else
-      result = @V7.GetOrderByNumber(params[:number], date_doc)
-      p "GetOrderByNumber(#{params[:number]}, #{date_doc})"
-    end
-  end
-
-    return result
-
 end
 
+get '/work/orders/by_number/:doc_number/:date' do
+  @V7.GetOrderByNumber(params[:doc_number], v7_date(params[:date]))
+end
 
+get '/work/orders/by_period/:date_1/:date_2' do
+  @V7.GetOrderByPeriod(v7_date(params[:date_1]), v7_date(params[:date_2]))
+end
+
+get '/work/orders/by_client_group/:code/:date' do
+  @V7.GetOrderByClientGroupCode(params[:code], v7_date(params[:date]))
+end
+
+get '/work/orders/by_client_group_period/:code/:date_1/:date_2' do
+  GetOrderByClientGroupCodePeriod(params[:code], v7_date(params[:date_1]),v7_date(params[:date_2]))
+end
 
 # ===================END GET REPORTexitS=========================================================
 def get_connect
