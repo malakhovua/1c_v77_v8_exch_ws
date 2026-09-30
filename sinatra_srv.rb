@@ -183,23 +183,30 @@ get '/work/reports/:report/:date1/:date2/:params' do
 end
 
 # ===================END GET REPORTexitS=========================================================
-before '/work/orders/*' do
+before '/work/documents/orders/*' do
   get_connect
 end
 
-get '/work/orders/by_number/:doc_number/:date' do
+helpers do
+  def v7_date(s)
+    d = Date.strptime(s, '%Y%m%d')
+    @V7.StringToDate(d.strftime('%d.%m.%Y'))
+  end
+end
+
+get 'work/documents/orders/by_number/:doc_number/:date' do
   @V7.GetOrderByNumber(params[:doc_number], v7_date(params[:date]))
 end
 
-get '/work/orders/by_period/:date_1/:date_2' do
+get '/work/documents/orders/by_period/:date_1/:date_2' do
   @V7.GetOrderByPeriod(v7_date(params[:date_1]), v7_date(params[:date_2]))
 end
 
-get '/work/orders/by_client_group/:code/:date' do
+get '/work/documents/orders/by_client_group/:code/:date' do
   @V7.GetOrderByClientGroupCode(params[:code], v7_date(params[:date]))
 end
 
-get '/work/orders/by_client_group_period/:code/:date_1/:date_2' do
+get '/work/documents/orders/by_client_group_period/:code/:date_1/:date_2' do
   GetOrderByClientGroupCodePeriod(params[:code], v7_date(params[:date_1]),v7_date(params[:date_2]))
 end
 
