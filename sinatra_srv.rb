@@ -206,7 +206,7 @@ get '/work/documents/orders/by_client_group/:code/:date' do
 end
 
 get '/work/documents/orders/by_client_group_period/:code/:date_1/:date_2' do
-  GetOrderByClientGroupCodePeriod(params[:code], v7_date(params[:date_1]),v7_date(params[:date_2]))
+  @V7.GetOrderByClientGroupCodePeriod(params[:code], v7_date(params[:date_1]),v7_date(params[:date_2]))
 end
 
 # ===================END GET REPORTexitS=========================================================
