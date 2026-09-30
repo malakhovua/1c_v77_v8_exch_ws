@@ -188,9 +188,8 @@ before '/work/documents/orders/*' do
 end
 
 helpers do
-  def v7_date(s)
-    d = Date.strptime(s, '%Y%m%d')
-    @V7.StringToDate(d.strftime('%d.%m.%Y'))
+  def v7_date(date)
+    @V7.StringToDate(date[0...10])
   end
 end
 
