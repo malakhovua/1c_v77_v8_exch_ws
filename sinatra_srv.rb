@@ -194,7 +194,7 @@ helpers do
   end
 end
 
-get 'work/documents/orders/by_number/:doc_number/:date' do
+get '/work/documents/orders/by_number/:doc_number/:date' do
   @V7.GetOrderByNumber(params[:doc_number], v7_date(params[:date]))
 end
 
